@@ -13,7 +13,7 @@
     Using partialTransparentImage As New Drawing.Bitmap(50, 50)
 
 
-      '                                                                         Change the graphics engine to GDI+ and it will render appropriately.
+      '                                                                         Change the graphics engine For a different effect here!
       Using tempGraphicsEngine As New IGraphics.TemporarilyChangeGraphicsEngine(IGraphics.GraphicsEngine.Direct2D)
 
         Using g = IGraphics.FromImage(partialTransparentImage)

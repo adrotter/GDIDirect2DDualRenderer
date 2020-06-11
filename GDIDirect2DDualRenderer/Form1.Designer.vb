@@ -70,9 +70,9 @@ Partial Class Form1
         Me.lblCount.AutoSize = True
         Me.lblCount.Location = New System.Drawing.Point(797, 45)
         Me.lblCount.Name = "lblCount"
-        Me.lblCount.Size = New System.Drawing.Size(25, 13)
+        Me.lblCount.Size = New System.Drawing.Size(13, 13)
         Me.lblCount.TabIndex = 4
-        Me.lblCount.Text = "255"
+        Me.lblCount.Text = "0"
         '
         'Form1
         '
