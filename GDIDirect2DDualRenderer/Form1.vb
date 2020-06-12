@@ -13,39 +13,40 @@
     Using partialTransparentImage As New Drawing.Bitmap(50, 50)
 
 
-      '                                                                         Change the graphics engine For a different effect here!
-      Using tempGraphicsEngine As New IGraphics.TemporarilyChangeGraphicsEngine(IGraphics.GraphicsEngine.Direct2D)
+            '                                                                         Change the graphics engine For a different effect here!
+            Using tempGraphicsEngine As New IGraphics.TemporarilyChangeGraphicsEngine(IGraphics.GraphicsEngine.Direct2D)
 
-        Using g = IGraphics.FromImage(partialTransparentImage)
-          g.Clear(Color.Transparent)
+                Using g = IGraphics.FromImage(partialTransparentImage)
+                    ' changing this to g.Clear(Color.Yellow) here doesn't work (it should!) because you're recreating the RT in your logic
+                    g.Clear(Color.Transparent)
 
-          Using transRedBrush As New SolidBrush(Color.FromArgb(newAlpha, Color.Red))
-            g.FillRectangle(transRedBrush, New Rectangle(0, 0, partialTransparentImage.Width - 1, partialTransparentImage.Height - 1))
-          End Using
+                    Using transRedBrush As New SolidBrush(Color.FromArgb(newAlpha, Color.Red))
+                        g.FillRectangle(transRedBrush, New Rectangle(0, 0, partialTransparentImage.Width - 1, partialTransparentImage.Height - 1))
+                    End Using
 
-          Using redBrush As New SolidBrush(Color.Red)
-            Using pen As New Pen(redBrush)
-              g.DrawRectangle(pen, New Rectangle(0, 0, partialTransparentImage.Width - 1, partialTransparentImage.Height - 1))
+                    Using redBrush As New SolidBrush(Color.Red)
+                        Using pen As New Pen(redBrush)
+                            g.DrawRectangle(pen, New Rectangle(0, 0, partialTransparentImage.Width - 1, partialTransparentImage.Height - 1))
+                        End Using
+                    End Using
+
+                End Using
+
             End Using
-          End Using
+
+
+
+
+            Using paintGraph = New Direct2D(e.Graphics)
+                paintGraph.Clear(Color.Yellow)
+
+                paintGraph.DrawImageUnscaled(partialTransparentImage, 10, 10, partialTransparentImage.Width, partialTransparentImage.Height)
+
+            End Using
+
+
 
         End Using
-
-      End Using
-
-
-
-
-      Using paintGraph = New Direct2D(e.Graphics)
-        paintGraph.Clear(Color.Yellow)
-
-        paintGraph.DrawImageUnscaled(partialTransparentImage, 10, 10, partialTransparentImage.Width, partialTransparentImage.Height)
-
-      End Using
-
-
-
-    End Using
   End Sub
 
   Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
